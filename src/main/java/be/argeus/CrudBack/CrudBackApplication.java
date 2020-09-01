@@ -24,12 +24,6 @@ public class CrudBackApplication {
 	}
 
 	@Bean
-	public ModelMapper modelMapper() {
-		ModelMapper modelMapper = new ModelMapper();
-		return modelMapper;
-	}
-
-	@Bean
 	PersonsRepository init(PersonsRepository personsRepository) {
 		AddressEntity address = getAddressEntity("Lalastraat", "Beringen", "3580", "België");
 

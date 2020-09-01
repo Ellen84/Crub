@@ -1,20 +1,23 @@
 package be.argeus.CrudBack.entities.rest;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+
 public class RestPerson extends AbstractRest {
     private String name;
     private String lastName;
+    @Schema(implementation = Boolean.class)
     private String minor;
+    @Schema(implementation = Boolean.class)
     private String resident;
-    private String iban;
+    private String email;
     private String nationalNumber;
-    private String kinship;
-    private String bcsiNumber;
     private RestAddress address;
     private String birthPlace;
     private String dateOfBirth;
+    @Schema(allowableValues = {"UNMARRIED", "MARRIED", "WIDOWED", "DIVORCED", "COHABITANT"})
     private String maritalStatus;
     private String partnerName;
 
@@ -50,36 +53,12 @@ public class RestPerson extends AbstractRest {
         this.resident = resident;
     }
 
-    public String getIban() {
-        return iban;
-    }
-
-    public void setIban(String iban) {
-        this.iban = iban;
-    }
-
     public String getNationalNumber() {
         return nationalNumber;
     }
 
     public void setNationalNumber(String nationalNumber) {
         this.nationalNumber = nationalNumber;
-    }
-
-    public String getKinship() {
-        return kinship;
-    }
-
-    public void setKinship(String kinship) {
-        this.kinship = kinship;
-    }
-
-    public String getBcsiNumber() {
-        return bcsiNumber;
-    }
-
-    public void setBcsiNumber(String bcsiNumber) {
-        this.bcsiNumber = bcsiNumber;
     }
 
     public RestAddress getAddress() {
@@ -121,4 +100,8 @@ public class RestPerson extends AbstractRest {
     public void setPartnerName(String partnerName) {
         this.partnerName = partnerName;
     }
+
+    public String getEmail() { return email;  }
+
+    public void setEmail(String email) { this.email = email; }
 }

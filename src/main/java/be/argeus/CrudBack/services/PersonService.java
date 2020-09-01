@@ -47,4 +47,5 @@ public interface PersonService extends FindById {
          */
         Optional<PersonEntity> findById(long id);
 
+        PersonEntity update(PersonEntity fromRest) throws DuplicateEntityException;
 }

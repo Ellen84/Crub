@@ -7,6 +7,7 @@ import be.argeus.CrudBack.repositories.PersonsRepository;
 import be.argeus.CrudBack.services.PersonService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -64,4 +65,12 @@ public class PersonServiceImpl implements PersonService {
         return personsRepository.findById(id);
     }
 
+    @Override
+    public PersonEntity update(PersonEntity fromRest) throws DuplicateEntityException {
+        try {
+            return personsRepository.save(fromRest);
+        }catch (DataIntegrityViolationException e){
+            throw new DuplicateEntityException(fromRest.getId());
+        }
+    }
 }

@@ -39,13 +39,19 @@ public class PersonController extends AbstractController<PersonEntity, RestPerso
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable final String id) throws EntityNotFoundException {
-        personService.delete(Long.parseLong(id));
+    public void delete(@PathVariable("id") long id) throws EntityNotFoundException {
+        personService.delete(id);
     }
 
     @GetMapping ("/{id}")
     public RestPerson get(@PathVariable final String id)  throws EntityNotFoundException {
        return toRest(findByIdOrError(personService,Long.parseLong(id)));
+    }
+
+    @PutMapping("/{id}")
+    public RestPerson update (@PathVariable("id") long id, @RequestBody RestPerson person) throws DuplicateEntityException {
+        PersonEntity personEntity = findByIdOrError(personService, id);
+        return toRest(personService.update(fromRest(person, personEntity)));
     }
 }
 
