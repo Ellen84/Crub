@@ -33,12 +33,6 @@ public class PersonServiceImpl implements PersonService {
     public PersonEntity create(final PersonEntity person) throws DuplicateEntityException {
         final PersonEntity newPerson = mapper.map(person, PersonEntity.class);
 
-        final long newId = newPerson.getId();
-
-        if (personsRepository.existsById(newId)) {
-            throw new DuplicateEntityException(newId);
-        }
-
         return personsRepository.save(newPerson);
     }
 
